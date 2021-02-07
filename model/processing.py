@@ -5,8 +5,14 @@ import string
 #import os
 
 def augment(w_list, aug_dict, min_letter_change = 6, max_letter_change = 10):
-            
-        #Convert random words to leet
+
+        #Randomly add letters
+        #<to do>
+        
+        #Randomly change letters
+        #<to do>
+
+        #Convert words to leet
         n_words = []
         
         for w in w_list:
