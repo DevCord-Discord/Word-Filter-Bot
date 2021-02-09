@@ -2,28 +2,39 @@ import numpy as np
 #import pandas as pd 
 import random
 import string
+import copy
 #import os
 
-def augment(w_list, aug_dict, min_letter_change = 6, max_letter_change = 10):
+def augment(w_list, aug_dict, min_letter_change = 6, max_letter_change = 10, change_prob = 0.3):
+
+        s_list = copy.copy(w_list)
 
         #Randomly add letters
         #<to do>
         
         #Randomly change letters
-        #<to do>
+        for i, w in enumerate(s_list):
+            s = w
+            if np.random.uniform() < change_prob:
+                for x in range(len(s)):
+                    if np.random.uniform() < change_prob:
+                        s = s.replace(s[x], random.choice(string.printable), 1)
+
+            s_list[i] = s
 
         #Convert words to leet
         n_words = []
         
-        for w in w_list:
+        for w in s_list:
             k = random.randint(min_letter_change, max_letter_change)
             
-            l = random.sample(list(leet_dict.keys()), k = int(k))
+            l = random.sample(list(aug_dict.keys()), k = int(k))
             #print(l)
             lr = [random.choice(aug_dict[x]) for x in l]
             #print(lr)
             
             s = w
+            #print(s)
             for x in zip(l, lr):
                 s = s.replace(x[0].lower(), x[1])
             
@@ -31,7 +42,7 @@ def augment(w_list, aug_dict, min_letter_change = 6, max_letter_change = 10):
         
         return n_words
 
-def wordsToLists(w_list, main_dict):
+def OneHot(w_list, main_dict):
     
     I_n = np.identity(len(main_dict))
     
