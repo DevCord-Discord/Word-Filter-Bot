@@ -42,7 +42,16 @@ def augment(w_list, aug_dict, min_letter_change = 6, max_letter_change = 10, cha
         
         return n_words
 
-def OneHot(w_list, main_dict):
+def sample(w_list, aug_dict, sample_size, change_prob = 0.3):
+    sp = random.sample(w_list, k = sample_size)
+    sp_a = augment(sp,  aug_dict = aug_dict, min_letter_change = 3, change_prob = change_prob)
+
+    sp = ['<start> ' + ' '.join(w) + ' <end>' for w in sp]
+    sp_a = ['<start> ' + ' '.join(w) + ' <end>' for w in sp_a]
+
+    return zip(sp, sp_a)
+
+'''def OneHot(w_list, main_dict):
     
     I_n = np.identity(len(main_dict))
     
@@ -60,4 +69,4 @@ def OneHot(w_list, main_dict):
         word_o_h_l.append(word_o_h)
         
     return word_o_h_l
-
+'''
