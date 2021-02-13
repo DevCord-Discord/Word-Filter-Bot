@@ -17,4 +17,4 @@ async def on_message(message):
     if message.content.startswith('$your mom'):
         await message.channel.send('Super gay')
 
-client.run('ODA3MTkyNjU0MDQ2ODIyNDgw.YB0avQ.VHlt_rOv8Yrpuifoql9TUSMfOAU')
+client.run(os.environ['token'])
