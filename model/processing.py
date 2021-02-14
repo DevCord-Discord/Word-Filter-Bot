@@ -1,4 +1,5 @@
 import numpy as np 
+import tensorflow as tf
 #import pandas as pd 
 import random
 import string
@@ -49,24 +50,19 @@ def sample(w_list, aug_dict, sample_size, change_prob = 0.3):
     sp = ['<start> ' + ' '.join(w) + ' <end>' for w in sp]
     sp_a = ['<start> ' + ' '.join(w) + ' <end>' for w in sp_a]
 
-    return zip(sp, sp_a)
+    return sp, sp_a
 
-'''def OneHot(w_list, main_dict):
-    
-    I_n = np.identity(len(main_dict))
-    
-    word_o_h_l = []
-    
-    for w in w_list:
-        
-        word_l = list(w)
-        word_o_h = []
-        
-        for letter in word_l:
-            letter_o_h = I_n[main_dict.index(letter)]
-            word_o_h.append(letter_o_h )
-        
-        word_o_h_l.append(word_o_h)
-        
-    return word_o_h_l
-'''
+def build_tokenizer(langs):
+
+    lang_tokenizer = tf.keras.preprocessing.text.Tokenizer(filters='')
+    for lang in langs:
+        lang_tokenizer.fit_on_texts(lang)
+
+    return lang_tokenizer
+
+def tokenize(tokenizer, word_list):
+
+    tensor = lang_tokenizer.texts_to_sequences(lang)
+    tensor = tf.keras.preprocessing.sequence.pad_sequences(tensor, padding='post')
+
+    return tensor
