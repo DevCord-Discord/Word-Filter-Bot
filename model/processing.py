@@ -1,10 +1,8 @@
 import numpy as np 
 import tensorflow as tf
-#import pandas as pd 
 import random
 import string
 import copy
-#import os
 
 def augment(w_list, aug_dict, min_letter_change = 6, max_letter_change = 10, change_prob = 0.3):
 
@@ -30,12 +28,9 @@ def augment(w_list, aug_dict, min_letter_change = 6, max_letter_change = 10, cha
             k = random.randint(min_letter_change, max_letter_change)
             
             l = random.sample(list(aug_dict.keys()), k = int(k))
-            #print(l)
             lr = [random.choice(aug_dict[x]) for x in l]
-            #print(lr)
             
             s = w
-            #print(s)
             for x in zip(l, lr):
                 s = s.replace(x[0].lower(), x[1])
             
